@@ -497,7 +497,7 @@ static void free_result_array(char **result, size_t count)
 {
     for (size_t i = 0; i < count; i++)
     {
-        free(result[i]); /* free(NULL) is valid in C. */
+        free(result[i]); /* free(NULL) est autorise */
     }
     free(result);
 }
@@ -512,7 +512,7 @@ char **FDDump(FILEDEDUP fd, int *length)
     size_t count_slots = 0;
     int set_found = 0;
 
-    /* Count only actual duplicate groups. */
+    /* Compter seulement les vrais groupes de doublons */
     for (size_t i = 0; i < SIZE_TABLE; i++)
     {
         // Traverse each bucket of the size table

@@ -1,19 +1,30 @@
-# Test suite
+# Test Suite and Performance Study
 
-The test suite exercises the public `FILEDEDUP` API through representative black-box scenarios and a few cases chosen specifically to stress internal design decisions.
+This directory contains automated tests for the file-deduplication core.
 
 ## Coverage
 
-- invalid/null arguments;
-- inaccessible or missing files;
-- no-duplicate inputs;
-- two and three identical files;
-- empty files;
-- large files;
-- same-size files with different content;
-- different-size files;
-- deferred/pending-file hashing cases;
-- multiple independent duplicate groups.
+The suite exercises the public API:
+
+- `FDInit`
+- `FDCheck`
+- `FDDump`
+
+Representative scenarios include invalid arguments, missing files, unique files, exact duplicates, equal-size files with different content, empty files, large files, pending-file behavior, and multiple duplicate groups.
+
+The tests are primarily black-box tests, with a few checks that also exercise implementation details such as deferred hashing and block-by-block comparison of large files.
+
+## Structure
+
+```text
+../src/
+  filededup.c
+  filededup.h
+./
+  test_filededup.c
+  Makefile
+  README.md
+```
 
 ## Run
 
@@ -21,4 +32,8 @@ The test suite exercises the public `FILEDEDUP` API through representative black
 make run
 ```
 
-The Makefile compiles `test_filededup.c` together with the implementation in `../src` and executes both correctness tests and the included performance study.
+or from the repository root:
+
+```bash
+make test
+```
